@@ -1,0 +1,14 @@
+.SearchResults {
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.Copyright {
+  text-align: center;
+  color: var(--color-grey-dark-2);
+  font-size: 1.2rem;
+  padding: 0 3.5rem;
+  padding-top: 4rem;
+  margin-top: auto;
+}

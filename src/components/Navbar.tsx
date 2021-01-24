@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from '../styles/Navbar.module.css';
 import logo from '../Images/logo.png';
 import icons from '../Images/icons.svg';
@@ -7,7 +8,9 @@ const Navbar = () => {
   return (
     <nav className={styles.Navbar}>
       {/* Logo */}
-      <img src={logo} alt="Forkify Main Logo" className={styles.Logo} />
+      <Link to="/">
+        <img src={logo} alt="Forkify Main Logo" className={styles.Logo} />
+      </Link>
 
       {/* The search from */}
       <SearchForm />

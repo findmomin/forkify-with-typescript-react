@@ -1,0 +1,49 @@
+.Navbar {
+  grid-area: Navbar;
+  padding: 0 3rem;
+  background-color: var(--color-grey-light-1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Logo {
+  height: 4.6rem;
+  display: block;
+}
+
+.BtnsContainer {
+  align-self: stretch;
+  margin-right: 2.5rem;
+  display: flex;
+  height: 100%;
+}
+
+.Btn {
+  position: relative;
+  height: 100%;
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 1.5rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.Btn:hover {
+  background-color: var(--color-grey-light-2);
+}
+
+.Icon {
+  height: 2.4rem;
+  width: 2.4rem;
+  fill: var(--color-primary);
+  margin-right: 0.7rem;
+  transform: translateY(-1px);
+}

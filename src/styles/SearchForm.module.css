@@ -1,0 +1,62 @@
+.SearchForm {
+  background-color: #fff;
+  border-radius: 10rem;
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+}
+
+.SearchForm:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 0.7rem 3rem rgba(97, 85, 79, 0.15);
+}
+
+.Input {
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.7rem;
+  width: 30rem;
+}
+
+.Input:focus {
+  outline: none;
+}
+
+.Input::placeholder {
+  color: var(--color-grey-light-3);
+}
+
+.Btn {
+  font-family: inherit;
+  font-weight: 600;
+  padding: 1.5rem 4rem;
+  font-size: 1.5rem;
+
+  background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
+  border-radius: 10rem;
+  border: none;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.Icon {
+  margin-right: 1rem;
+}
+
+@media only screen and (max-width: var(--bp-medium)) {
+  .Input {
+    width: auto;
+  }
+
+  .Input::placeholder {
+    color: white;
+  }
+}
