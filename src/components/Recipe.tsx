@@ -1,6 +1,8 @@
+import styles from '../styles/Recipe.module.css';
+
 export default function Recipe() {
   return (
-    <div>
+    <div className={styles.Recipe}>
       <p>recipe</p>
     </div>
   );
