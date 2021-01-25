@@ -2,19 +2,14 @@ import { Switch, Route } from 'react-router-dom';
 import styles from '../styles/RecipeContainer.module.css';
 import Message from './styled/Message';
 import icons from '../Images/icons.svg';
+import Recipe from './Recipe';
 
-export default function Recipe() {
+const RecipeContainer = () => {
   return (
     <div className={styles.RecipeContainer}>
       <Switch>
         {/* Recipe */}
-        <Route
-          exact
-          path="/:query/:id"
-          render={() => {
-            return <h1>Recipe</h1>;
-          }}
-        />
+        <Route exact path="/:query/:id" render={() => <Recipe />} />
 
         {/* Message */}
         <Message>
@@ -26,4 +21,6 @@ export default function Recipe() {
       </Switch>
     </div>
   );
-}
+};
+
+export default RecipeContainer;

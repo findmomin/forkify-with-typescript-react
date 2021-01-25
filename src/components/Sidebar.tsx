@@ -1,9 +1,10 @@
 import { Switch, Route } from 'react-router-dom';
-import styles from '../styles/Sidebar.module.css';
 import icons from '../Images/icons.svg';
+import styles from '../styles/Sidebar.module.css';
 import Message from './styled/Message';
+import Results from './Results';
 
-export default function SearchResults() {
+const Sidebar = () => {
   return (
     <div className={styles.Sidebar}>
       <Switch>
@@ -23,10 +24,12 @@ export default function SearchResults() {
       </Switch>
 
       {/* Search Results */}
-      <Route path="/:query" render={() => <h1>Results here</h1>} />
+      <Route path="/:query" render={() => <Results />} />
 
       {/* Footer text */}
       <p className={styles.Copyright}>&copy; by Abdul Momin</p>
     </div>
   );
-}
+};
+
+export default Sidebar;

@@ -1,16 +1,19 @@
+import { ResultsProvider } from '../contexts/Results.context';
 import styles from '../styles/App.module.css';
 import Navbar from './Navbar';
-import SearchResults from './Sidebar';
-import Recipe from './RecipeContainer';
+import Sidebar from './Sidebar';
+import RecipeContainer from './RecipeContainer';
 
-function App() {
+const App = () => {
   return (
     <div className={styles.App}>
       <Navbar />
-      <SearchResults />
-      <Recipe />
+      <ResultsProvider>
+        <Sidebar />
+      </ResultsProvider>
+      <RecipeContainer />
     </div>
   );
-}
+};
 
 export default App;

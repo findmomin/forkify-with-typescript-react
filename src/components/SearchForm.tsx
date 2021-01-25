@@ -1,10 +1,33 @@
+import { useHistory } from 'react-router-dom';
 import styles from '../styles/SearchForm.module.css';
 import icons from '../Images/icons.svg';
+import useInput from '../hooks/useInput';
 
 const SearchForm = () => {
+  // History
+  const history = useHistory();
+
+  // State
+  const [value, setValue] = useInput('');
+
+  const handleChange = (e: React.ChangeEvent) =>
+    setValue((e.target as HTMLInputElement).value);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Setting the route
+    history.push(`/${value}`);
+
+    // Resetting the input
+    setValue('');
+  };
+
   return (
-    <form className={styles.SearchForm}>
+    <form className={styles.SearchForm} onSubmit={handleSubmit}>
       <input
+        value={value}
+        onChange={handleChange}
         className={styles.Input}
         type="text"
         required
