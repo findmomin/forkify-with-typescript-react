@@ -47,11 +47,15 @@
   transition: all 0.2s;
 }
 
+.Btn:hover {
+  transform: scale(1.05);
+}
+
 .Icon {
   margin-right: 1rem;
 }
 
-@media only screen and (max-width: var(--bp-medium)) {
+@media only screen and (max-width: 61.25em) ) {
   .Input {
     width: auto;
   }

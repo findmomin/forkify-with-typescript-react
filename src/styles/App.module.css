@@ -15,7 +15,7 @@
     'SearchResult Recipe';
 }
 
-@media only screen and (max-width: var(--bp-large)) {
+@media only screen and (max-width: 78.15em) {
   .App {
     max-width: 100%;
     margin: 0;

@@ -1,0 +1,19 @@
+.Message {
+  margin: 0 auto;
+  padding: 5rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Message svg {
+  height: 3rem;
+  width: 3rem;
+  fill: #f38e82;
+  margin-right: 1rem;
+}
+
+.Message p {
+  line-height: 1.5;
+  font-weight: 600;
+}
