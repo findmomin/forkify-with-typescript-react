@@ -1,9 +1,12 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import styles from '../styles/SearchForm.module.css';
 import icons from '../Images/icons.svg';
 import useInput from '../hooks/useInput';
 
 const SearchForm = () => {
+  // Getting the recipe id from the url (if any)
+  const match = useRouteMatch<{ recipeId: string }>('/:query/:recipeId');
+
   // History
   const history = useHistory();
 
@@ -16,10 +19,10 @@ const SearchForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const [, , recipeId] = history.location.pathname.split('/');
-
     // Setting the route
-    history.push(`/${value}${recipeId ? `/${recipeId}` : ''}`);
+    history.push(
+      `/${value}${match?.params.recipeId ? `/${match.params.recipeId}` : ''}`
+    );
 
     // Resetting the input
     setValue('');
