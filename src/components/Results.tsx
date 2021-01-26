@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { ResultsContext } from '../contexts/Results.context';
 import styles from '../styles/Results.module.css';
+import Spinner from './styled/Spinner';
 import Result from './Result';
 
 const Results: React.FC = () => {
@@ -26,7 +27,7 @@ const Results: React.FC = () => {
 
   return (
     <div className={styles.Results}>
-      {results?.length ? markup : <h1>Rendering</h1>}
+      {results?.length ? markup : <Spinner />}
     </div>
   );
 };
