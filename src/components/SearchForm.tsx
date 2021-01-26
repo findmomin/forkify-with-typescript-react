@@ -17,7 +17,7 @@ const SearchForm = () => {
     e.preventDefault();
 
     // Setting the route
-    history.push(`/${value}`);
+    history.push(value.replace(/ /g, '-'));
 
     // Resetting the input
     setValue('');

@@ -1,4 +1,3 @@
-import { ResultsProvider } from '../contexts/Results.context';
 import styles from '../styles/App.module.css';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
@@ -8,9 +7,7 @@ const App = () => {
   return (
     <div className={styles.App}>
       <Navbar />
-      <ResultsProvider>
-        <Sidebar />
-      </ResultsProvider>
+      <Sidebar />
       <RecipeContainer />
     </div>
   );
