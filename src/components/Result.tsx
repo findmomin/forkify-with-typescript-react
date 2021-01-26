@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import icons from '../Images/icons.svg';
 import styles from '../styles/Result.module.css';
 import * as Types from '../Types';
@@ -14,7 +14,11 @@ const Result: React.FC<Props> = ({
   const { query } = useParams<{ query: string }>();
 
   return (
-    <Link to={`/${query}/${id}`} className={styles.Link}>
+    <NavLink
+      to={`/${query}/${id}`}
+      className={styles.Link}
+      activeClassName={styles.Active}
+    >
       <figure className={styles.Figure}>
         <img src={image_url} alt={title} />
       </figure>
@@ -27,7 +31,7 @@ const Result: React.FC<Props> = ({
           </svg>
         </div>
       </div>
-    </Link>
+    </NavLink>
   );
 };
 
