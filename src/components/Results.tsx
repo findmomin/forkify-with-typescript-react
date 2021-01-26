@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import styles from '../styles/Results.module.css';
+import { RES_PER_PAGE } from '../constants';
 import * as Types from '../Types';
 import Spinner from './styled/Spinner';
 import Result from './Result';
+import Paginator from './Paginator';
 
 const Results: React.FC = () => {
+  // For redirecting user to home
   const history = useHistory();
 
   // Getting the search query from the url
@@ -13,15 +16,25 @@ const Results: React.FC = () => {
     params: { query },
   } = useRouteMatch<{ query: string }>('/:query')!;
 
+  // State
   // Search results
-  const [results, setResults] = useState<Types.Results>([]);
+  const [searchResults, setSearchResults] = useState<Types.Results>([]);
+
+  // Current page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Total number of pages
+  const [totalPages, setTotalPages] = useState(0);
 
   // Setting the query in the context if the query is new
   useEffect(() => {
     if (!query) return;
 
     // Clearing old results (if any)
-    setResults([]);
+    setSearchResults([]);
+
+    // Resetting the current page
+    setCurrentPage(1);
 
     // Gets the results for a query
     const getResults = async () => {
@@ -39,19 +52,33 @@ const Results: React.FC = () => {
         return history.push('/');
       }
 
-      setResults(recipes);
+      // Updating the total pages
+      setTotalPages(recipes.length / RES_PER_PAGE);
+
+      // Storing new results
+      setSearchResults(recipes);
     };
 
     getResults();
-  }, [query]);
+  }, [query, history]);
 
-  const markup = results?.map(result => (
-    <Result key={result.id} result={result} />
-  ));
+  const markup = searchResults
+    ?.slice((currentPage - 1) * RES_PER_PAGE, RES_PER_PAGE * currentPage)
+    .map(result => <Result key={result.id} result={result} />);
 
   return (
     <div className={styles.Results}>
-      {results?.length ? markup : <Spinner />}
+      {/* The results */}
+      {searchResults?.length ? markup : <Spinner />}
+
+      {/* Paginator */}
+      {totalPages > 1 && (
+        <Paginator
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </div>
   );
 };

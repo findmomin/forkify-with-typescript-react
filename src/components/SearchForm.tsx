@@ -16,8 +16,10 @@ const SearchForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const [, , recipeId] = history.location.pathname.split('/');
+
     // Setting the route
-    history.push(value.replace(/ /g, '-'));
+    history.push(`/${value}${recipeId ? `/${recipeId}` : ''}`);
 
     // Resetting the input
     setValue('');

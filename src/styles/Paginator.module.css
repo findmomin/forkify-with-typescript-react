@@ -1,0 +1,49 @@
+.Paginator {
+  justify-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 0 3.5rem;
+}
+
+.Btn {
+  color: #f38e82;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: none;
+  background-color: #f9f5f3;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.Btn:hover {
+  background: var(--color-grey-light-2);
+}
+
+.Icon {
+  height: 1.6rem;
+  width: 1.6rem;
+  fill: currentColor;
+  margin: 0 0.3rem;
+}
+
+.CurrentPage {
+  font-size: 2.5rem;
+  display: flex;
+  width: 5rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: center;
+  color: #f38e82;
+  background: #ffdede;
+  border-radius: 50%;
+}
+
+.Hidden {
+  visibility: hidden;
+}
