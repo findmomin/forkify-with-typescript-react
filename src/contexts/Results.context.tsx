@@ -1,13 +1,19 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import * as Types from '../Types';
 
-export const ResultsContext = createContext<Types.Results>([]);
+interface Value {
+  query: string;
+  results: Types.Results;
+  setQuery: (query: string) => void;
+}
 
+export const ResultsContext = createContext<Partial<Value>>({});
 export const ResultsProvider: React.FC = ({ children }) => {
   // State
-  // If the route matches a search route
-  const match = useRouteMatch<{ query: string }>('/:query');
+  // The search query
+  const [query, setQuery] = useState('');
+
   const history = useHistory();
 
   // Search results
@@ -15,11 +21,7 @@ export const ResultsProvider: React.FC = ({ children }) => {
 
   // If any query is available get results for that query
   useEffect(() => {
-    if (!match) return;
-
-    const {
-      params: { query },
-    } = match;
+    if (!query) return;
 
     setResults([]);
 
@@ -43,11 +45,15 @@ export const ResultsProvider: React.FC = ({ children }) => {
     };
 
     getResults();
-  }, [match?.params.query]);
+  }, [query, history]);
+
+  const value: Value = {
+    results,
+    query,
+    setQuery,
+  };
 
   return (
-    <ResultsContext.Provider value={results}>
-      {children}
-    </ResultsContext.Provider>
+    <ResultsContext.Provider value={value}>{children}</ResultsContext.Provider>
   );
 };
