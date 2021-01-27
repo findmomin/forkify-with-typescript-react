@@ -32,7 +32,7 @@ const Navbar = () => {
           <span>Bookmarks</span>
 
           {/* Bookmarks container */}
-          <div className={styles.Bookmarks}>
+          <div className={styles.Bookmarks} style={{ cursor: 'initial' }}>
             <Bookmarks />
           </div>
         </button>
