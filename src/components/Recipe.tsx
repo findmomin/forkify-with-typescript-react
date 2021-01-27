@@ -1,4 +1,4 @@
-import { useEffect, useState, memo, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import fraction from 'fraction.js';
@@ -193,4 +193,4 @@ const Recipe = () => {
   );
 };
 
-export default memo(Recipe);
+export default Recipe;
