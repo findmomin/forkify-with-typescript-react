@@ -13,10 +13,19 @@ const Bookmarks = () => {
 
   const message = (
     <Message>
-      <svg>
+      <svg style={{ width: '10rem' }}>
         <use href={`${icons}#icon-alert-triangle`}></use>
       </svg>
-      <p>No bookmarks yet. Find a nice recipe and bookmark it ;)</p>
+      <p
+        style={{
+          fontSize: '1.8rem',
+          lineHeight: 1.5,
+          fontWeight: 600,
+          textTransform: 'initial',
+        }}
+      >
+        No bookmarks yet. Find a nice recipe and bookmark it ;)
+      </p>
     </Message>
   );
 
