@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+import fraction from 'fraction.js';
 import icons from '../Images/icons.svg';
 import styles from '../styles/Recipe.module.css';
 import * as Types from '../Types';
@@ -48,15 +49,29 @@ const Recipe = () => {
     getRecipe();
   }, [recipeId, history]);
 
+  const updateServings = (servings: number) => {
+    if (servings < 1) return;
+
+    const ingredients = recipe!.ingredients.map(ingredient => {
+      const quantity = (ingredient.quantity * servings) / recipe!.servings;
+
+      return { ...ingredient, quantity };
+    });
+
+    setRecipe({ ...recipe!, servings, ingredients });
+  };
+
   const ingredients = recipe?.ingredients.map(
     ({ description, quantity, unit }) => (
       <li className={styles.Ingredient} key={uuid()}>
         <svg>
           <use href={`${icons}#icon-check`}></use>
         </svg>
-        <div className={styles.Quantity}> {quantity}</div>
+        <div className={styles.Quantity}>
+          {quantity ? new fraction(quantity).toFraction(true) : ''}
+        </div>
         <div>
-          <span>{unit}</span>
+          <span>{unit} </span>
           {description}
         </div>
       </li>
@@ -92,12 +107,18 @@ const Recipe = () => {
           <span>servings</span>
 
           <div className={styles.Btns}>
-            <button className={styles.Btn}>
+            <button
+              onClick={() => updateServings(recipe?.servings! - 1)}
+              className={styles.Btn}
+            >
               <svg>
                 <use href={`${icons}#icon-minus-circle`}></use>
               </svg>
             </button>
-            <button className={styles.Btn}>
+            <button
+              onClick={() => updateServings(recipe?.servings! + 1)}
+              className={styles.Btn}
+            >
               <svg>
                 <use href={`${icons}#icon-plus-circle`}></use>
               </svg>
