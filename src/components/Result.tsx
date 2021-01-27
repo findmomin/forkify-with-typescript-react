@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import icons from '../Images/icons.svg';
 import styles from '../styles/Result.module.css';
 import * as Types from '../Types';
@@ -9,10 +9,8 @@ interface Props {
 }
 
 const Result: React.FC<Props> = ({
-  result: { id, title, publisher, image_url },
+  result: { id, query, title, publisher, image_url },
 }) => {
-  const { query } = useParams<{ query: string }>();
-
   return (
     <NavLink
       to={`/${query}/${id}`}

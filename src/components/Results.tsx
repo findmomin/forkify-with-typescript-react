@@ -53,6 +53,9 @@ const Results: React.FC = () => {
       // Updating the total pages
       setTotalPages(recipes.length / RES_PER_PAGE);
 
+      // Injecting the query in each result
+      recipes.forEach(recipe => (recipe.query = query));
+
       // Storing new results
       setSearchResults(recipes);
     };

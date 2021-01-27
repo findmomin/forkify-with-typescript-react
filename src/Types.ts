@@ -1,6 +1,6 @@
 export interface Result {
   id: string;
-  query?: string;
+  query: string;
   title: string;
   image_url: string;
   publisher: string;
