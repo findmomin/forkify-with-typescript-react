@@ -3,7 +3,7 @@ import * as Types from '../Types';
 
 interface Value {
   bookmarks: Types.Results;
-  addToBookmark: (bookmark: Types.Result) => void;
+  addToBookmark: (newBookmark: Types.Result) => void;
 }
 
 export const BookmarksContext = createContext<Partial<Value>>({});
@@ -11,8 +11,13 @@ export const BookmarksContext = createContext<Partial<Value>>({});
 export const BookmarksProvider: React.FC = ({ children }) => {
   const [bookmarks, setBookmarks] = useState<Types.Results>([]);
 
-  const addToBookmark = (bookmark: Types.Result) => {
-    setBookmarks([bookmark, ...bookmarks]);
+  const addToBookmark = (newBookmark: Types.Result) => {
+    // Checking if the newBookmark exists
+    if (bookmarks.some(({ id }) => id === newBookmark.id))
+      // if yes then unbookmark it
+      setBookmarks(bookmarks.filter(({ id }) => id !== newBookmark.id));
+    // else bookmark it
+    else setBookmarks([newBookmark, ...bookmarks]);
   };
 
   return (

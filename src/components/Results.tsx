@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import styles from '../styles/Results.module.css';
 import { RES_PER_PAGE } from '../constants';
 import * as Types from '../Types';
@@ -12,9 +12,7 @@ const Results: React.FC = () => {
   const history = useHistory();
 
   // Getting the search query from the url
-  const {
-    params: { query },
-  } = useRouteMatch<{ query: string }>('/:query')!;
+  const { query } = useParams<{ query: string }>();
 
   // State
   // Search results
