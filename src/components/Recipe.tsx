@@ -1,17 +1,34 @@
-import { useEffect, useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useEffect, useState, memo, useContext } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import fraction from 'fraction.js';
+import { BookmarksContext } from '../contexts/Bookmarks.context';
 import icons from '../Images/icons.svg';
 import styles from '../styles/Recipe.module.css';
 import * as Types from '../Types';
 import Spinner from './styled/Spinner';
 
 const Recipe = () => {
-  // Getting the search query from the url
-  const {
-    params: { recipeId },
-  } = useRouteMatch<{ query: string; recipeId: string }>('/:query/:recipeId')!;
+  // Consuming context
+  const { bookmarks, addToBookmark } = useContext(BookmarksContext);
+
+  // Getting query & recipe id from the url
+  const { query, recipeId } = useParams<{ query: string; recipeId: string }>();
+
+  // Adds to bookmark
+  const handleAddBookmark = () => {
+    const { id, title, image_url, publisher } = recipe!;
+
+    const bookmark: Types.Result = {
+      id,
+      query,
+      title,
+      image_url,
+      publisher,
+    };
+
+    addToBookmark!(bookmark);
+  };
 
   // For redirecting user to search route
   const history = useHistory();
@@ -60,6 +77,8 @@ const Recipe = () => {
 
     setRecipe({ ...recipe!, servings, ingredients });
   };
+
+  const isBookmarked = bookmarks?.some(bookmark => bookmark.id === recipe?.id);
 
   const ingredients = recipe?.ingredients.map(
     ({ description, quantity, unit }) => (
@@ -131,9 +150,11 @@ const Recipe = () => {
             <use href={`${icons}#icon-user`}></use>
           </svg>
         </div>
-        <button className={styles.BtnRound}>
-          <svg className="">
-            <use href={`${icons}#icon-bookmark`}></use>
+        <button className={styles.BtnRound} onClick={handleAddBookmark}>
+          <svg>
+            <use
+              href={`${icons}#icon-bookmark${isBookmarked ? '-fill' : ''}`}
+            ></use>
           </svg>
         </button>
       </div>
@@ -172,4 +193,4 @@ const Recipe = () => {
   );
 };
 
-export default Recipe;
+export default memo(Recipe);

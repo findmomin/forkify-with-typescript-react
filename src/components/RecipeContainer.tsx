@@ -9,7 +9,7 @@ const RecipeContainer = () => {
     <div className={styles.RecipeContainer}>
       <Switch>
         {/* Recipe */}
-        <Route exact path="/:query/:id" render={() => <Recipe />} />
+        <Route exact path="/:query/:recipeId" render={() => <Recipe />} />
 
         {/* Message */}
         <Message>
