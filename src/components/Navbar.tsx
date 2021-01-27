@@ -3,6 +3,7 @@ import styles from '../styles/Navbar.module.css';
 import logo from '../Images/logo.png';
 import icons from '../Images/icons.svg';
 import SearchForm from './SearchForm';
+import Bookmarks from './Bookmarks';
 
 const Navbar = () => {
   return (
@@ -23,11 +24,17 @@ const Navbar = () => {
           </svg>
           <span>Add Recipe</span>
         </button>
+
         <button className={styles.Btn}>
           <svg className={styles.Icon}>
             <use href={`${icons}#icon-bookmark`}></use>
           </svg>
           <span>Bookmarks</span>
+
+          {/* Bookmarks container */}
+          <div className={styles.Bookmarks}>
+            <Bookmarks />
+          </div>
         </button>
       </div>
     </nav>
