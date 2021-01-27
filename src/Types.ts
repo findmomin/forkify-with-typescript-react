@@ -24,3 +24,8 @@ export interface Recipe {
   publisher: string;
   ingredients: Ingredient[];
 }
+
+export interface BookmarksActions {
+  type: 'ADD';
+  bookmark: Result;
+}

@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 import * as Types from '../Types';
 
 interface Value {
@@ -9,7 +10,7 @@ interface Value {
 export const BookmarksContext = createContext<Partial<Value>>({});
 
 export const BookmarksProvider: React.FC = ({ children }) => {
-  const [bookmarks, setBookmarks] = useState<Types.Results>([]);
+  const [bookmarks, setBookmarks] = useLocalStorage('forkifyBookmarks', []);
 
   const addToBookmark = (newBookmark: Types.Result) => {
     // Checking if the newBookmark exists
