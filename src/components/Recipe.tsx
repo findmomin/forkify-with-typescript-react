@@ -7,7 +7,7 @@ import Spinner from './styled/Spinner';
 const Recipe = () => {
   // Getting the search query from the url
   const {
-    params: { query, recipeId },
+    params: { recipeId },
   } = useRouteMatch<{ query: string; recipeId: string }>('/:query/:recipeId')!;
 
   // For redirecting user to search route
@@ -36,7 +36,7 @@ const Recipe = () => {
 
       if (res.status !== 'success') {
         alert('Error loading recipe :(');
-        return history.push(`/${query}`);
+        return history.goBack();
       }
 
       // Storing new recipe
