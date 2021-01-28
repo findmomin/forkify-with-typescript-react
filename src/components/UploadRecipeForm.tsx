@@ -4,10 +4,13 @@ import { API_URL, API_KEY } from '../constants';
 import icons from '../Images/icons.svg';
 import styles from '../styles/UploadRecipeForm.module.css';
 import * as Types from '../Types';
+import { useHistory } from 'react-router-dom';
 
 const UploadRecipeForm = () => {
   // Consuming context
   const { toggleOverlay } = useContext(UploadRecipeFormContext);
+
+  const history = useHistory();
 
   // Form element
   const form = useRef<HTMLFormElement>(null);
@@ -80,6 +83,11 @@ const UploadRecipeForm = () => {
       // Resetting the inputs
       [...document.querySelectorAll('input')].forEach(
         input => (input.value = '')
+      );
+
+      // Redirecting user to the reicpe page
+      history.push(
+        `/${createdRecipe.title.replaceAll(' ', '-')}/${createdRecipe.id}`
       );
     }
   };
