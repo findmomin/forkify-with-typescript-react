@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { RES_PER_PAGE } from '../constants';
+import { getResults } from '../helpers';
 import styles from '../styles/Results.module.css';
-import { RES_PER_PAGE, API_URL, API_KEY } from '../constants';
 import * as Types from '../Types';
 import Spinner from './styled/Spinner';
 import Result from './Result';
@@ -34,31 +35,25 @@ const Results: React.FC = () => {
     // Resetting the current page
     setCurrentPage(1);
 
-    // Gets the results for a query
-    const getResults = async () => {
-      const {
-        results,
-        data: { recipes },
-      }: { results: number; data: { recipes: Types.Results } } = await (
-        await fetch(`${API_URL}?search=${query}&key=${API_KEY}`)
-      ).json();
+    const getSearchResults = async (query: string) => {
+      // Getting the results
+      const results = await getResults(query);
 
       if (!results) {
-        alert('No recipes found :(');
-        return history.push('/');
+        return history.goBack();
       }
 
       // Updating the total pages
-      setTotalPages(recipes.length / RES_PER_PAGE);
+      setTotalPages(results.length / RES_PER_PAGE);
 
       // Injecting the query in each result
-      recipes.forEach(recipe => (recipe.query = query));
+      results.forEach(result => (result.query = query));
 
       // Storing new results
-      setSearchResults(recipes);
+      setSearchResults(results);
     };
 
-    getResults();
+    getSearchResults(query);
   }, [query, history]);
 
   const markup = searchResults

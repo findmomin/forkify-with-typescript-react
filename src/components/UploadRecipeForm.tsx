@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { UploadRecipeFormContext } from '../contexts/UploadRecipeForm.context';
-import { API_URL, API_KEY } from '../constants';
+import { uploadRecipe } from '../helpers';
 import icons from '../Images/icons.svg';
 import styles from '../styles/UploadRecipeForm.module.css';
 import * as Types from '../Types';
@@ -14,29 +14,6 @@ const UploadRecipeForm = () => {
 
   // Form element
   const form = useRef<HTMLFormElement>(null);
-
-  // Upload the recipe
-  const uploadRecipe = async (userRecipe: Types.UserReicpe) => {
-    try {
-      const {
-        data: { recipe },
-      }: { data: { recipe: Types.UserReicpe } } = await (
-        await fetch(`${API_URL}/?key=${API_KEY}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userRecipe),
-        })
-      ).json();
-
-      if (!recipe) return alert('Error creating recipe. Try again :(');
-
-      return recipe;
-    } catch (err) {
-      return alert('Error creating recipe. Try again :(');
-    }
-  };
 
   // Submit handler
   const handleSubmit = async (e: React.FormEvent) => {
