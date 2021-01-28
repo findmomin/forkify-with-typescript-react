@@ -12,7 +12,7 @@ export const getResults = async (query: string) => {
     ).json();
 
     if (!results) {
-      return alert('No recipes found :(');
+      return alert('No results found :(');
     }
 
     return recipes;
@@ -21,10 +21,25 @@ export const getResults = async (query: string) => {
   }
 };
 
-export const getRecipe = async () => {
-  //
+// Gets the recipe for a given recipe id
+export const getRecipe = async (recipeId: string) => {
+  try {
+    const res: {
+      status: string;
+      data: { recipe: Types.Recipe };
+    } = await (await fetch(`${API_URL}/${recipeId}?key=${API_KEY}`)).json();
+
+    if (res.status !== 'success') {
+      return alert('Error loading recipe :(');
+    }
+
+    return res.data.recipe;
+  } catch (err) {
+    alert('Error loading recipe :(');
+  }
 };
 
+// Uploads a user created recipe to the api
 export const uploadRecipe = async (userRecipe: Types.UserReicpe) => {
   try {
     const {

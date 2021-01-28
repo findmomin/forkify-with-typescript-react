@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import fraction from 'fraction.js';
-import { API_URL, API_KEY } from '../constants';
+import { getRecipe } from '../helpers';
 import { BookmarksContext } from '../contexts/Bookmarks.context';
 import icons from '../Images/icons.svg';
 import styles from '../styles/Recipe.module.css';
@@ -44,23 +44,16 @@ const Recipe = () => {
     // Clearing old recipe (if any)
     setRecipe(undefined);
 
-    // Gets the recipe for a given id
-    const getRecipe = async () => {
-      const res: {
-        status: string;
-        data: { recipe: Types.Recipe };
-      } = await (await fetch(`${API_URL}/${recipeId}?key=${API_KEY}`)).json();
+    const getNewRecipe = async (recipeId: string) => {
+      const recipe = await getRecipe(recipeId);
 
-      if (res.status !== 'success') {
-        alert('Error loading recipe :(');
-        return history.goBack();
-      }
+      if (!recipe) return history.goBack();
 
       // Storing new recipe
-      setRecipe(res.data.recipe);
+      setRecipe(recipe);
     };
 
-    getRecipe();
+    getNewRecipe(recipeId);
   }, [recipeId, history]);
 
   const updateServings = (servings: number) => {
