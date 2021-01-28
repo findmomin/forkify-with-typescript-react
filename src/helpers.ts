@@ -11,13 +11,12 @@ export const getResults = async (query: string) => {
       await fetch(`${API_URL}?search=${query}&key=${API_KEY}`)
     ).json();
 
-    if (!results) {
-      return alert('No results found :(');
-    }
+    if (!results)
+      throw new Error('No results found. Search for something else.');
 
     return recipes;
   } catch (err) {
-    alert('No recipes found :(');
+    throw new Error('No results found. Search for something else.');
   }
 };
 
@@ -29,13 +28,12 @@ export const getRecipe = async (recipeId: string) => {
       data: { recipe: Types.Recipe };
     } = await (await fetch(`${API_URL}/${recipeId}?key=${API_KEY}`)).json();
 
-    if (res.status !== 'success') {
-      return alert('Error loading recipe :(');
-    }
+    if (res.status !== 'success')
+      throw new Error('Error loading recipe. Try again.');
 
     return res.data.recipe;
   } catch (err) {
-    alert('Error loading recipe :(');
+    throw new Error('Error loading recipe. Try again.');
   }
 };
 
@@ -54,10 +52,10 @@ export const uploadRecipe = async (userRecipe: Types.UserReicpe) => {
       })
     ).json();
 
-    if (!recipe) return alert('Error creating recipe. Try again :(');
+    if (!recipe) throw new Error('Error creating recipe. Try again.');
 
     return recipe;
   } catch (err) {
-    return alert('Error creating recipe. Try again :(');
+    throw new Error('Error creating recipe. Try again.');
   }
 };

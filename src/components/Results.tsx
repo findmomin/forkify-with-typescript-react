@@ -36,21 +36,24 @@ const Results: React.FC = () => {
     setCurrentPage(1);
 
     const getSearchResults = async (query: string) => {
-      // Getting the results
-      const results = await getResults(query);
+      try {
+        // Getting the results
+        const results = await getResults(query);
 
-      if (!results) {
-        return history.goBack();
+        // Updating the total pages
+        setTotalPages(results.length / RES_PER_PAGE);
+
+        // Injecting the query in each result
+        results.forEach(result => (result.query = query));
+
+        // Storing new results
+        setSearchResults(results);
+      } catch (err) {
+        // Add a notification in the notification context
+
+        // Redirect the user back
+        history.goBack();
       }
-
-      // Updating the total pages
-      setTotalPages(results.length / RES_PER_PAGE);
-
-      // Injecting the query in each result
-      results.forEach(result => (result.query = query));
-
-      // Storing new results
-      setSearchResults(results);
     };
 
     getSearchResults(query);

@@ -51,11 +51,11 @@ const UploadRecipeForm = () => {
       ingredients,
     };
 
-    // Uploading the recipe & receiving the result
-    const createdRecipe = await uploadRecipe(recipe);
+    try {
+      // Uploading the recipe & receiving the result
+      const createdRecipe = await uploadRecipe(recipe);
 
-    // If we got back the recipe, close the window & clear the input fields
-    if (createdRecipe) {
+      // If we got back the recipe, close the window & clear the input fields
       // Hiding the recipe creator
       toggleOverlay!();
 
@@ -78,6 +78,10 @@ const UploadRecipeForm = () => {
       history.push(
         `/${createdRecipe.title.replaceAll(' ', '-')}/${createdRecipe.id}`
       );
+    } catch (err) {
+      // Add a notification in the notification context
+
+      alert(err);
     }
   };
 

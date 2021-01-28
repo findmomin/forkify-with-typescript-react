@@ -45,12 +45,17 @@ const Recipe = () => {
     setRecipe(undefined);
 
     const getNewRecipe = async (recipeId: string) => {
-      const recipe = await getRecipe(recipeId);
+      try {
+        const recipe = await getRecipe(recipeId);
 
-      if (!recipe) return history.goBack();
+        // Storing new recipe
+        setRecipe(recipe);
+      } catch (err) {
+        // Add a notification in the notification context
 
-      // Storing new recipe
-      setRecipe(recipe);
+        // Redirect the user back
+        history.goBack();
+      }
     };
 
     getNewRecipe(recipeId);
