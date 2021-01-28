@@ -19,6 +19,7 @@ export type Ingredients = Ingredient[];
 
 export interface UserReicpe {
   id?: string;
+  key?: string;
   title: string;
   source_url: string;
   image_url: string;
@@ -31,9 +32,4 @@ export interface UserReicpe {
 export interface Recipe extends UserReicpe {
   id: string;
   key?: string;
-}
-
-export interface BookmarksActions {
-  type: 'ADD';
-  bookmark: Result;
 }

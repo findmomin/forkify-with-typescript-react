@@ -5,10 +5,12 @@ import icons from '../Images/icons.svg';
 import styles from '../styles/UploadRecipeForm.module.css';
 import * as Types from '../Types';
 import { useHistory } from 'react-router-dom';
+import { BookmarksContext } from '../contexts/Bookmarks.context';
 
 const UploadRecipeForm = () => {
   // Consuming context
   const { toggleOverlay } = useContext(UploadRecipeFormContext);
+  const { addToBookmark } = useContext(BookmarksContext);
 
   const history = useHistory();
 
@@ -61,6 +63,16 @@ const UploadRecipeForm = () => {
       [...document.querySelectorAll('input')].forEach(
         input => (input.value = '')
       );
+
+      // Adding the recipe to the bookmarks
+      addToBookmark!({
+        id: createdRecipe.id!,
+        key: createdRecipe.key,
+        query: createdRecipe.title.replaceAll(' ', '-'),
+        title: createdRecipe.title,
+        image_url: createdRecipe.image_url,
+        publisher: createdRecipe.publisher,
+      });
 
       // Redirecting user to the reicpe page
       history.push(
