@@ -1,5 +1,6 @@
 export interface Result {
   id: string;
+  key?: string;
   query: string;
   title: string;
   image_url: string;
@@ -9,13 +10,14 @@ export interface Result {
 export type Results = Result[];
 
 interface Ingredient {
-  quantity: number;
+  quantity: number | null;
   unit: string;
   description: string;
 }
 
-export interface Recipe {
-  id: string;
+export type Ingredients = Ingredient[];
+
+export interface UserReicpe {
   title: string;
   source_url: string;
   image_url: string;
@@ -23,6 +25,11 @@ export interface Recipe {
   cooking_time: number;
   publisher: string;
   ingredients: Ingredient[];
+}
+
+export interface Recipe extends UserReicpe {
+  id: string;
+  key?: string;
 }
 
 export interface BookmarksActions {

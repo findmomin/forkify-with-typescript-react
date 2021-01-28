@@ -21,7 +21,9 @@ const SearchForm = () => {
 
     // Setting the route
     history.push(
-      `/${value}${match?.params.recipeId ? `/${match.params.recipeId}` : ''}`
+      `/${value.replace(/ /g, '-')}${
+        match?.params.recipeId ? `/${match.params.recipeId}` : ''
+      }`
     );
 
     // Resetting the input

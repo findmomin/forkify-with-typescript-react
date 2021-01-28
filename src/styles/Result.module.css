@@ -57,6 +57,7 @@
   grid-template-columns: 1fr 2rem;
   row-gap: 0.1rem;
   align-items: center;
+  justify-content: start;
 }
 
 .Title {
@@ -72,6 +73,7 @@
 }
 
 .Publisher {
+  text-align: start;
   font-size: 1.15rem;
   color: var(--color-grey-dark-2);
   text-transform: uppercase;

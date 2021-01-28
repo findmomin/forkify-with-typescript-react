@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Result: React.FC<Props> = ({
-  result: { id, query, title, publisher, image_url },
+  result: { id, query, title, publisher, image_url, key },
 }) => {
   return (
     <NavLink
@@ -23,11 +23,13 @@ const Result: React.FC<Props> = ({
       <div className={styles.Data}>
         <h4 className={styles.Title}>{title}</h4>
         <p className={styles.Publisher}>{publisher}</p>
-        <div className={styles.UserGenerated}>
-          <svg>
-            <use href={`${icons}#icon-user`}></use>
-          </svg>
-        </div>
+        {key ? (
+          <div className={styles.UserGenerated}>
+            <svg>
+              <use href={`${icons}#icon-user`}></use>
+            </svg>
+          </div>
+        ) : null}
       </div>
     </NavLink>
   );

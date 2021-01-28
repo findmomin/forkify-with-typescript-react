@@ -70,7 +70,7 @@ const Recipe = () => {
     if (servings < 1) return;
 
     const ingredients = recipe!.ingredients.map(ingredient => {
-      const quantity = (ingredient.quantity * servings) / recipe!.servings;
+      const quantity = (ingredient.quantity! * servings) / recipe!.servings;
 
       return { ...ingredient, quantity };
     });
@@ -146,9 +146,11 @@ const Recipe = () => {
         </div>
 
         <div className={styles.UserGenerated}>
-          <svg>
-            <use href={`${icons}#icon-user`}></use>
-          </svg>
+          {recipe?.key ? (
+            <svg>
+              <use href={`${icons}#icon-user`}></use>
+            </svg>
+          ) : null}
         </div>
         <button className={styles.BtnRound} onClick={handleAddBookmark}>
           <svg>

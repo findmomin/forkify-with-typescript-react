@@ -47,3 +47,22 @@
   margin-right: 0.7rem;
   transform: translateY(-1px);
 }
+
+.Bookmarks {
+  position: absolute;
+  top: 100%;
+  right: -5.5rem;
+  padding: 1.5rem 0;
+  background-color: #fff;
+  width: 40rem;
+  box-shadow: 0 0.8rem 5rem 2rem rgb(97, 85, 81, 10%);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 10;
+  transition: all 0.5s 0.2s;
+}
+
+.Btn:hover .Bookmarks {
+  visibility: initial;
+  opacity: 1;
+}
