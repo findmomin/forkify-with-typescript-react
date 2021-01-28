@@ -22,8 +22,6 @@ const App = () => {
 
           {/* Add recipe overlay */}
           <UploadRecipeOverlay />
-
-          {/* Add recipe form */}
         </UploadRecipeFormProvider>
       </BookmarksProvider>
     </div>

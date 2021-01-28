@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styles from '../styles/Results.module.css';
-import { RES_PER_PAGE } from '../constants';
+import { RES_PER_PAGE, API_URL, API_KEY } from '../constants';
 import * as Types from '../Types';
 import Spinner from './styled/Spinner';
 import Result from './Result';
@@ -40,9 +40,7 @@ const Results: React.FC = () => {
         results,
         data: { recipes },
       }: { results: number; data: { recipes: Types.Results } } = await (
-        await fetch(
-          `https://forkify-api.herokuapp.com/api/v2/recipes?search=${query}`
-        )
+        await fetch(`${API_URL}?search=${query}&key=${API_KEY}`)
       ).json();
 
       if (!results) {

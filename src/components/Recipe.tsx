@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import fraction from 'fraction.js';
+import { API_URL, API_KEY } from '../constants';
 import { BookmarksContext } from '../contexts/Bookmarks.context';
 import icons from '../Images/icons.svg';
 import styles from '../styles/Recipe.module.css';
@@ -48,11 +49,7 @@ const Recipe = () => {
       const res: {
         status: string;
         data: { recipe: Types.Recipe };
-      } = await (
-        await fetch(
-          `https://forkify-api.herokuapp.com/api/v2/recipes/${recipeId}`
-        )
-      ).json();
+      } = await (await fetch(`${API_URL}/${recipeId}?key=${API_KEY}`)).json();
 
       if (res.status !== 'success') {
         alert('Error loading recipe :(');

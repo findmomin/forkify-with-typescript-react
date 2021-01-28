@@ -4,6 +4,8 @@ export const NOTIFICATION_TIMEOUT = 10;
 
 export const API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes';
 
+export const API_KEY = '8bb2ccdd-2e9f-4422-86c8-8c8b43cd111b';
+
 export const SEARCH_QUERIES = [
   'carrot',
   'broccoli',
