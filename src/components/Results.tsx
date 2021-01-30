@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { RES_PER_PAGE } from '../constants';
 import { getResults } from '../helpers';
+import { NotificationSetter } from '../contexts/Notification.context';
 import styles from '../styles/Results.module.css';
 import * as Types from '../Types';
 import Spinner from './styled/Spinner';
@@ -9,6 +10,9 @@ import Result from './Result';
 import Paginator from './Paginator';
 
 const Results: React.FC = () => {
+  // Consuming context
+  const setNotification = useContext(NotificationSetter);
+
   // For redirecting user to home
   const history = useHistory();
 
@@ -50,6 +54,11 @@ const Results: React.FC = () => {
         setSearchResults(results);
       } catch (err) {
         // Add a notification in the notification context
+        setNotification({
+          isShowing: true,
+          message: err.message,
+          type: 'error',
+        });
 
         // Redirect the user back
         history.goBack();
@@ -57,7 +66,7 @@ const Results: React.FC = () => {
     };
 
     getSearchResults(query);
-  }, [query, history]);
+  }, [query, history, setNotification]);
 
   const markup = searchResults
     ?.slice((currentPage - 1) * RES_PER_PAGE, RES_PER_PAGE * currentPage)

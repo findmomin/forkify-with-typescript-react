@@ -5,23 +5,30 @@ import Sidebar from './Sidebar';
 import RecipeContainer from './RecipeContainer';
 import UploadRecipeOverlay from './UploadRecipeOverlay';
 import { UploadRecipeFormProvider } from '../contexts/UploadRecipeForm.context';
+import { NotificationProvider } from '../contexts/Notification.context';
+import Notification from './Notification';
 
 const App = () => {
   return (
     <div className={styles.App}>
       <BookmarksProvider>
         <UploadRecipeFormProvider>
-          {/* The navbar */}
-          <Navbar />
+          <NotificationProvider>
+            {/* The navbar */}
+            <Navbar />
 
-          {/* The sidebar or search results area */}
-          <Sidebar />
+            {/* The sidebar or search results area */}
+            <Sidebar />
 
-          {/* The recipe area */}
-          <RecipeContainer />
+            {/* The recipe area */}
+            <RecipeContainer />
 
-          {/* Add recipe overlay */}
-          <UploadRecipeOverlay />
+            {/* Add recipe overlay */}
+            <UploadRecipeOverlay />
+
+            {/* Notification */}
+            <Notification />
+          </NotificationProvider>
         </UploadRecipeFormProvider>
       </BookmarksProvider>
     </div>

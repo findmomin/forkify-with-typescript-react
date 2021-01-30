@@ -1,5 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { UploadRecipeFormContext } from '../contexts/UploadRecipeForm.context';
+import { NotificationSetter } from '../contexts/Notification.context';
 import { uploadRecipe } from '../helpers';
 import icons from '../Images/icons.svg';
 import styles from '../styles/UploadRecipeForm.module.css';
@@ -11,6 +12,7 @@ const UploadRecipeForm = () => {
   // Consuming context
   const { toggleOverlay } = useContext(UploadRecipeFormContext);
   const { addToBookmark } = useContext(BookmarksContext);
+  const setNotification = useContext(NotificationSetter);
 
   const history = useHistory();
 
@@ -78,10 +80,16 @@ const UploadRecipeForm = () => {
       history.push(
         `/${createdRecipe.title.replaceAll(' ', '-')}/${createdRecipe.id}`
       );
+
+      // Showing a success notification
+      setNotification({
+        isShowing: true,
+        message: 'Recipe successfully created. Well done!',
+        type: 'success',
+      });
     } catch (err) {
       // Add a notification in the notification context
-
-      alert(err);
+      setNotification({ isShowing: true, message: err.message, type: 'error' });
     }
   };
 

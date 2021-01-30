@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import fraction from 'fraction.js';
 import { getRecipe } from '../helpers';
 import { BookmarksContext } from '../contexts/Bookmarks.context';
+import { NotificationSetter } from '../contexts/Notification.context';
 import icons from '../Images/icons.svg';
 import styles from '../styles/Recipe.module.css';
 import * as Types from '../Types';
@@ -12,6 +13,7 @@ import Spinner from './styled/Spinner';
 const Recipe = () => {
   // Consuming context
   const { bookmarks, addToBookmark } = useContext(BookmarksContext);
+  const setNotification = useContext(NotificationSetter);
 
   // Getting query & recipe id from the url
   const { query, recipeId } = useParams<{ query: string; recipeId: string }>();
@@ -52,6 +54,11 @@ const Recipe = () => {
         setRecipe(recipe);
       } catch (err) {
         // Add a notification in the notification context
+        setNotification({
+          message: err.message,
+          type: 'error',
+          isShowing: true,
+        });
 
         // Redirect the user back
         history.goBack();
@@ -59,7 +66,7 @@ const Recipe = () => {
     };
 
     getNewRecipe(recipeId);
-  }, [recipeId, history]);
+  }, [recipeId, history, setNotification]);
 
   const updateServings = (servings: number) => {
     if (servings < 1) return;

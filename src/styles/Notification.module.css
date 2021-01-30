@@ -1,0 +1,35 @@
+.Notification {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  padding: 2px 1.7rem;
+  border-radius: 3px;
+  transform: translateX(-50%);
+  transition: transform 0.3s;
+  z-index: 3;
+}
+
+.Hidden {
+  transform: translate(-50%, 15vh);
+}
+
+.Success {
+  color: #424242;
+  background: #daffe0;
+  border: 2px solid #00c04a;
+}
+
+.Error {
+  color: #535353;
+  background: #ffd3d3;
+  border: 2px solid #f48982;
+}
+
+.Close {
+  margin-left: 3.5rem;
+  cursor: pointer;
+  background: none;
+}
