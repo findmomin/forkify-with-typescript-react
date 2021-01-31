@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { UploadRecipeFormContext } from '../contexts/UploadRecipeForm.context';
-import styles from '../styles/UploadRecipeOverlay.module.css';
+import styles from '../styles/Overlay.module.css';
 import UploadRecipeForm from './UploadRecipeForm';
 
-const UploadRecipeOverlay = () => {
+const Overlay = () => {
   // Consuming context
   const { isOverlayShowing, toggleOverlay } = useContext(
     UploadRecipeFormContext
@@ -19,4 +19,4 @@ const UploadRecipeOverlay = () => {
   );
 };
 
-export default UploadRecipeOverlay;
+export default Overlay;
