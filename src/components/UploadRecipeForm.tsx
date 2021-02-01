@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import { UploadRecipeFormContext } from '../contexts/UploadRecipeForm.context';
+import { OverlayContext } from '../contexts/Overlay.context';
 import { NotificationSetter } from '../contexts/Notification.context';
 import { uploadRecipe } from '../helpers';
 import icons from '../Images/icons.svg';
@@ -10,7 +10,7 @@ import { BookmarksContext } from '../contexts/Bookmarks.context';
 
 const UploadRecipeForm = () => {
   // Consuming context
-  const { toggleOverlay } = useContext(UploadRecipeFormContext);
+  const { toggleOverlay } = useContext(OverlayContext);
   const { addToBookmark } = useContext(BookmarksContext);
   const setNotification = useContext(NotificationSetter);
 
@@ -59,7 +59,7 @@ const UploadRecipeForm = () => {
 
       // If we got back the recipe, close the window & clear the input fields
       // Hiding the recipe creator
-      toggleOverlay!();
+      toggleOverlay!({ isOverlayShowing: true, activeComp: 'FORM' });
 
       // Resetting the inputs
       [...document.querySelectorAll('input')].forEach(
@@ -100,7 +100,12 @@ const UploadRecipeForm = () => {
         e.stopPropagation();
       }}
     >
-      <button className={styles.BtnClose} onClick={toggleOverlay}>
+      <button
+        className={styles.BtnClose}
+        onClick={() =>
+          toggleOverlay!({ isOverlayShowing: true, activeComp: 'FORM' })
+        }
+      >
         ×
       </button>
       <form className={styles.Form} onSubmit={handleSubmit} ref={form}>

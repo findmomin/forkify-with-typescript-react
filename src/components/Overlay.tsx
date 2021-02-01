@@ -1,20 +1,20 @@
 import { useContext } from 'react';
-import { UploadRecipeFormContext } from '../contexts/UploadRecipeForm.context';
+import { OverlayContext } from '../contexts/Overlay.context';
 import styles from '../styles/Overlay.module.css';
 import UploadRecipeForm from './UploadRecipeForm';
 
 const Overlay = () => {
   // Consuming context
-  const { isOverlayShowing, toggleOverlay } = useContext(
-    UploadRecipeFormContext
+  const { isOverlayShowing, activeComp, toggleOverlay } = useContext(
+    OverlayContext
   );
 
   return (
     <div
       className={`${styles.Overlay} ${isOverlayShowing ? '' : styles.Hidden}`}
-      onClick={toggleOverlay}
+      onClick={() => toggleOverlay!({ isOverlayShowing: false })}
     >
-      <UploadRecipeForm />
+      {activeComp === 'FORM' ? <UploadRecipeForm /> : 'queries'}
     </div>
   );
 };

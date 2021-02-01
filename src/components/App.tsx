@@ -3,8 +3,8 @@ import styles from '../styles/App.module.css';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import RecipeContainer from './RecipeContainer';
-import UploadRecipeOverlay from './Overlay';
-import { UploadRecipeFormProvider } from '../contexts/UploadRecipeForm.context';
+import Overlay from './Overlay';
+import { OverlayProvider } from '../contexts/Overlay.context';
 import { NotificationProvider } from '../contexts/Notification.context';
 import Notification from './Notification';
 
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div className={styles.App}>
       <BookmarksProvider>
-        <UploadRecipeFormProvider>
+        <OverlayProvider>
           <NotificationProvider>
             {/* The navbar */}
             <Navbar />
@@ -24,12 +24,12 @@ const App = () => {
             <RecipeContainer />
 
             {/* Add recipe overlay */}
-            <UploadRecipeOverlay />
+            <Overlay />
 
             {/* Notification */}
             <Notification />
           </NotificationProvider>
-        </UploadRecipeFormProvider>
+        </OverlayProvider>
       </BookmarksProvider>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { UploadRecipeFormContext } from '../contexts/UploadRecipeForm.context';
+import { OverlayContext } from '../contexts/Overlay.context';
 import logo from '../Images/logo.png';
 import icons from '../Images/icons.svg';
 import styles from '../styles/Navbar.module.css';
@@ -9,7 +9,7 @@ import Bookmarks from './Bookmarks';
 
 const Navbar = () => {
   // Consuming context
-  const { toggleOverlay } = useContext(UploadRecipeFormContext);
+  const { toggleOverlay } = useContext(OverlayContext);
 
   return (
     <nav className={styles.Navbar}>
@@ -23,7 +23,12 @@ const Navbar = () => {
 
       {/* Buttons */}
       <div className={styles.BtnsContainer}>
-        <button className={styles.Btn} onClick={toggleOverlay}>
+        <button
+          className={styles.Btn}
+          onClick={() =>
+            toggleOverlay!({ isOverlayShowing: true, activeComp: 'FORM' })
+          }
+        >
           <svg className={styles.Icon}>
             <use href={`${icons}#icon-edit`}></use>
           </svg>
