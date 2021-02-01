@@ -1,15 +1,16 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import {
   NotificationContext,
   NotificationSetter,
 } from '../contexts/Notification.context';
+import { OverlayContext } from '../contexts/Overlay.context';
 import styles from '../styles/Notification.module.css';
 
 const Notification = () => {
   // Consuming context
   const notification = useContext(NotificationContext);
   const setNotification = useContext(NotificationSetter);
+  const { toggleOverlay } = useContext(OverlayContext);
 
   return (
     <div
@@ -21,7 +22,18 @@ const Notification = () => {
         {notification.message?.startsWith('No results') ? (
           <>
             {notification.message}
-            <Link to={'available-queries'}>&nbsp; See available queries</Link>
+            <span
+              onClick={() => {
+                toggleOverlay!({
+                  isOverlayShowing: true,
+                  activeComp: 'QUERIES',
+                });
+
+                setNotification({ ...notification, isShowing: false });
+              }}
+            >
+              &nbsp; See available queries
+            </span>
           </>
         ) : (
           notification.message

@@ -12,8 +12,9 @@
   z-index: 3;
 }
 
-.Notification a {
+.Notification span {
   color: #1b82bd;
+  cursor: pointer;
 }
 
 .Hidden {
