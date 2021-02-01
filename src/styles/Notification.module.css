@@ -8,12 +8,16 @@
   padding: 2px 1.7rem;
   border-radius: 3px;
   transform: translateX(-50%);
-  transition: transform 0.3s;
+  transition: transform 0.5s;
   z-index: 3;
 }
 
+.Notification a {
+  color: #1b82bd;
+}
+
 .Hidden {
-  transform: translate(-50%, 15vh);
+  transform: translate(-50%, 17vh);
 }
 
 .Success {

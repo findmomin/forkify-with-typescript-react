@@ -12,7 +12,7 @@ const Overlay = () => {
   return (
     <div
       className={`${styles.Overlay} ${isOverlayShowing ? '' : styles.Hidden}`}
-      onClick={() => toggleOverlay!({ isOverlayShowing: false })}
+      onClick={() => toggleOverlay!({ isOverlayShowing: false, activeComp })}
     >
       {activeComp === 'FORM' ? <UploadRecipeForm /> : 'queries'}
     </div>

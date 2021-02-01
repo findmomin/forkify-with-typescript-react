@@ -11,12 +11,11 @@ export const getResults = async (query: string) => {
       await fetch(`${API_URL}?search=${query}&key=${API_KEY}`)
     ).json();
 
-    if (!results)
-      throw new Error('No results found. Search for something else.');
+    if (!results) throw new Error('No results found.');
 
     return recipes;
   } catch (err) {
-    throw new Error('No results found. Search for something else.');
+    throw new Error('No results found.');
   }
 };
 

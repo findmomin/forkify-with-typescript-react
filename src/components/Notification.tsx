@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import {
   NotificationContext,
   NotificationSetter,
@@ -16,7 +17,16 @@ const Notification = () => {
         notification.type === 'success' ? styles.Success : styles.Error
       } ${notification.isShowing ? '' : styles.Hidden}`}
     >
-      <p>{notification.message}</p>
+      <p>
+        {notification.message?.startsWith('No results') ? (
+          <>
+            {notification.message}
+            <Link to={'available-queries'}>&nbsp; See available queries</Link>
+          </>
+        ) : (
+          notification.message
+        )}
+      </p>
       <button
         className={styles.Close}
         onClick={() => setNotification({ ...notification, isShowing: false })}
