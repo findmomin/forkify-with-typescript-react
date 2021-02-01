@@ -94,12 +94,7 @@ const UploadRecipeForm = () => {
   };
 
   return (
-    <div
-      className={styles.Window}
-      onClick={e => {
-        e.stopPropagation();
-      }}
-    >
+    <div className={styles.Window} onClick={e => e.stopPropagation()}>
       <button
         className={styles.BtnClose}
         onClick={() =>
