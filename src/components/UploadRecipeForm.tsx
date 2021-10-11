@@ -87,7 +87,7 @@ const UploadRecipeForm = () => {
         message: 'Recipe successfully created. Well done!',
         type: 'success',
       });
-    } catch (err) {
+    } catch (err: any) {
       // Add a notification in the notification context
       setNotification({ isShowing: true, message: err.message, type: 'error' });
     }
@@ -98,7 +98,7 @@ const UploadRecipeForm = () => {
       <button
         className={styles.BtnClose}
         onClick={() =>
-          toggleOverlay!({ isOverlayShowing: true, activeComp: 'FORM' })
+          toggleOverlay!({ isOverlayShowing: false, activeComp: 'FORM' })
         }
       >
         ×

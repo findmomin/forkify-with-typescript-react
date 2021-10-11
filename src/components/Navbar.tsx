@@ -30,7 +30,7 @@ const Navbar = () => {
           }
         >
           <svg className={styles.Icon}>
-            <use href={`${icons}#icon-edit`}></use>
+            <use href={`${icons}#icon-edit`} />
           </svg>
           <span>Add Recipe</span>
         </button>
